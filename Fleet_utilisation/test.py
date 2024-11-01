@@ -13,7 +13,7 @@ data_cleaner = DataCleaner(data)
 
 # Test handle_missing_values Method
 print(f"\nBefore handling missing values:\n{data.isnull().sum()}")  # Check for missing values on initial data
-df_cleaned = data_cleaner.handle_missing_values()
+df_cleaned = data_cleaner.handle_missing_values() 
 print(f"\nAfter handling missing values:\n{df_cleaned.isnull().sum()}")  # Check for any remaining missing values on cleaned data
 
 # Test remove_duplicates Method

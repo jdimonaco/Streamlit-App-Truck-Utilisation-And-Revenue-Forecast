@@ -5,6 +5,7 @@ import streamlit as st
 from data_cleaner import DataCleaner
 from fleet_analysis import FleetAnalysis
 
+# Set the title of the Streamlit app
 st.title("Fleet Utilisation and Revenue Prediction")
 
 # Initialise session state variables to store data and states
@@ -49,19 +50,20 @@ if uploaded_file is not None:
 if st.session_state.fleet_analysis:
     if st.button("Predict Revenue"):
         model, mae, st.session_state.df_cleaned = st.session_state.fleet_analysis.predict_revenue()
-        st.write(f"Model Mean Absolute Error: {mae}")
-        st.session_state.predicted = True
+        st.write(f"Model Mean Absolute Error: {mae}")  # Display the MAE of the model
+        st.session_state.predicted = True # Update state to indicate prediction has been made
 
 # Show graph if prediction has been made
 if st.session_state.predicted:
     if st.button("Show Graph"):
+        # Check if required columns for plotting are available
         if 'predicted_revenue' in st.session_state.df_cleaned.columns and 'total_revenue' in st.session_state.df_cleaned.columns:
             # Convert 'Date' column to datetime and group by month
             st.session_state.df_cleaned['Date'] = pd.to_datetime(st.session_state.df_cleaned['Date'], dayfirst=True)
             
             # Select only numeric columns for resampling
-            numeric_cols = st.session_state.df_cleaned.select_dtypes(include=[np.number]).columns
-            monthly_data = st.session_state.df_cleaned.resample('ME', on='Date')[numeric_cols].mean()
+            numeric_cols = st.session_state.df_cleaned.select_dtypes(include=[np.number]).columns # Select only numeric columns 
+            monthly_data = st.session_state.df_cleaned.resample('ME', on='Date')[numeric_cols].mean() # Resample monthly by taking the mean of numeric columns
 
             plt.figure(figsize=(12, 6))
             plt.plot(monthly_data.index, monthly_data['total_revenue'], color='orange', label='Total Revenue')

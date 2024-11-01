@@ -3,9 +3,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, r2_score
 
 
-# Define a class for the fleet analysis with methodsto calculate utlisation and predict revenues.
+# Define a class for the fleet analysis with methods to calculate utlisation and predict revenues.
 class FleetAnalysis:
     def __init__(self, data) -> None:
+        """Initialise the FleetAnalysis class."""
         self.data = data
     
     # Calculate freight over or under utilisation
@@ -15,11 +16,11 @@ class FleetAnalysis:
             max_value = max(row['weight'], row['cbm'])
             """If maximum value is greater than capacity return overutilisation else underutilisation."""
             if max_value > row['capacity']:
-                return "Overutilisation"
+                return "Overutilisation" # Return "Overutilisation" if the limit is exceeded
             else:
-                return "Underutilisation"
+                return "Underutilisation" # Return "Underutilisation" otherwise
         
-        # Applies this function to each row and add the result as a new column called utilisation
+        # Apply this function to each row and add the result as a new column called utilisation
         self.data['Utilisation'] = self.data.apply(utilisation, axis=1)
         print("Data after adding Utilisation column:")
         return self.data
@@ -29,7 +30,7 @@ class FleetAnalysis:
         # Drop columns before splitting the dataset
         data_dropped = self.data.drop(columns=['shipment_id', 'Date', 'truck_type', 'Utilisation'])
         
-        # Use slicing to select columns
+        # Select features (X) and the target variable (y)
         X = data_dropped.drop(columns=['total_revenue'])  # Exclude 'total_revenue' column from features
         y = data_dropped['total_revenue']   # Select the target column I want to predict 
         
