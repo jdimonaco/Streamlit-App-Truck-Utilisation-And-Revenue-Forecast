@@ -1,5 +1,5 @@
 # Task Explanation
-This project aims to analyse daily truck utilisation and predict revenue using Python. The implementation uses pandas for data manipulation, scikit-learn for machine learning, and Streamlit for web app deployment. The project seeks to automate the calculation of truck utilisation, reducing manual input, and to forecast revenue. The aim is to optimise operations, reduce costs, and enhance financial forecasting for better planning and decision-making, ultimately improving overall efficiency.
+This project aims to analyse daily truck utilisation and predict revenue using Python, delivered through a Streamlit web app. The implementation uses pandas for data manipulation, scikit-learn for machine learning, and Streamlit for web app deployment. The project automates truck utilisation calculations, reducing manual input, and forecasts revenue to support better planning and decision-making. The goal is to optimise operations, reduce costs, and enhance financial forecasting. By providing these features using a web-app platform, the project improve efficiency and empower users to make data-driven decisions.
 
 ## Model Architecture
 
