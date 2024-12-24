@@ -4,7 +4,7 @@ from fleet_analysis import FleetAnalysis
 
 
 # Main function to execute data processing and analysis 
-def main():
+def main() -> None:
     # Load data from a CSV file
     data = pd.read_csv("truck_utilisation.csv")
 
