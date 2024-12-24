@@ -10,11 +10,17 @@ class DataCleaner:
         """Drop rows with missing shipment_id."""
         self.data = self.data.dropna(subset=['shipment_id'])
 
-        """Fill missing values in weight, cbm, daily_cost, and total_revenue columns with their respective mean values."""
-        self.data['weight'] = self.data['weight'].fillna(self.data['weight'].mean())
-        self.data['cbm'] = self.data['cbm'].fillna(self.data['cbm'].mean())
-        self.data['daily_cost'] = self.data['daily_cost'].fillna(self.data['daily_cost'].mean())
-        self.data['total_revenue'] = self.data['total_revenue'].fillna(self.data['total_revenue'].mean())
+        #Function to fill missing values in columns with their respective mean values.
+        def fill_with_mean(column_name) -> None:
+            self.data[column_name] = self.data[column_name].fillna(self.data[column_name].mean())
+
+        #Define a variable with the list of columns to fill missing values.
+        columns_with_missing_values = ['weight','cbm','daily_cost', 'total_revenue']
+
+        #Loop through each column in the list (columns_with_missing_values) and use the fill_with_mean function to handle missing values.
+        for column in columns_with_missing_values:
+            fill_with_mean(column)
+        
         return self.data
     
     def remove_duplicates(self):
