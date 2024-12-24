@@ -10,8 +10,8 @@ class FleetAnalysis:
         self.data = data
     
     # Calculate freight over or under utilisation
-    def calculate_utilisation(self):
-        def utilisation(row):
+    def calculate_utilisation(self) -> pd.DataFrame:
+        def utilisation(row) -> pd.DataFrame:
             """Calculates the maximum value between weight and cbm for each row."""
             max_value = max(row['weight'], row['cbm'])
             """If maximum value is greater than capacity return overutilisation else underutilisation."""
@@ -26,7 +26,7 @@ class FleetAnalysis:
         return self.data
 
     # Predict revenue
-    def predict_revenue(self):
+    def predict_revenue(self) -> tuple:
         # Drop columns before splitting the dataset
         data_dropped = self.data.drop(columns=['shipment_id', 'Date', 'truck_type', 'Utilisation'])
         
