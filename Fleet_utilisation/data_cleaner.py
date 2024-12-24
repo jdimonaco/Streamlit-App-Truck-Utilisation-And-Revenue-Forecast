@@ -6,7 +6,7 @@ class DataCleaner:
         """Initialise the DataCleaner class."""
         self.data = data
 
-    def handle_missing_values(self):
+    def handle_missing_values(self) -> pd.DataFrame:
         """Drop rows with missing shipment_id."""
         self.data = self.data.dropna(subset=['shipment_id'])
 
@@ -23,7 +23,7 @@ class DataCleaner:
         
         return self.data
     
-    def remove_duplicates(self):
+    def remove_duplicates(self) -> pd.DataFrame:
         """Remove duplicate rows based on shipment_id."""
         self.data = self.data.drop_duplicates(subset=['shipment_id']) 
         return self.data
