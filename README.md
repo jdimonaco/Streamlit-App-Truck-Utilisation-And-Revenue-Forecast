@@ -34,5 +34,13 @@ A Streamlit app is provided to interact with the model. This app allows users to
 * Make predictions
 * Visualise results
 
+## Main Files
+
+* main.py: Central execution point that calls data cleaning and analysis
+* data_cleaner.py: Handles data preprocessing
+* fleet_analysis.py: Revenue prediction and utilisation analysis
+* test.py: Unit tests and validation
+* app.py: Streamlit web interface for interactive analysis
+
 ## Data
 This project and dataset were created specifically for educational purpose. The data is fictional and may not reflect the full complexity of real-world scenarios.
