@@ -9,12 +9,12 @@ from fleet_analysis import FleetAnalysis
 st.title("Fleet Utilisation and Revenue Prediction")
 
 # Initialise session state variables to store data and states
+if 'df_cleaned' not in st.session_state:
+    st.session_state.df_cleaned = None
 if 'fleet_analysis' not in st.session_state:
     st.session_state.fleet_analysis = None
 if 'predicted' not in st.session_state:
     st.session_state.predicted = False
-if 'df_cleaned' not in st.session_state:
-    st.session_state.df_cleaned = None
 
 # Widget to upload CSV file
 uploaded_file = st.file_uploader("Upload Truck Utilisation Data (CSV)", type="csv")
@@ -41,10 +41,12 @@ if uploaded_file is not None:
         # Initialise FleetAnalysis with cleaned data
         st.session_state.fleet_analysis = FleetAnalysis(st.session_state.df_cleaned)
 
-        # Calculate utilisation and update session state
+# Button to calculate utilisation
+if st.session_state.fleet_analysis:
+    if st.button("Calculate Utilisation"):
         st.session_state.df_cleaned = st.session_state.fleet_analysis.calculate_utilisation()
         st.write("Utilisation Column", st.session_state.df_cleaned[['weight', 'cbm', 'capacity', 'Utilisation']].head()) 
-        st.write("Cleaned Data", st.session_state.df_cleaned) 
+        st.write("Complete Data", st.session_state.df_cleaned) 
 
 # Predict revenue if fleet_analysis is initialised and df_cleaned is available
 if st.session_state.fleet_analysis:
