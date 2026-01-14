@@ -18,7 +18,7 @@ Test the values before and after data preprocessing
 
 * Calculate truck utilisation
 * Split the data into training and testing sets
-* Train the logistic regression model on the training set
+* Train the linear regression model on the training set
 
 ## Model Evaluation:
 
