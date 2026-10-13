@@ -17,7 +17,7 @@ The model architecture involves the following steps:
 
 ### Model Training
 
-* Calculate truck utilisation
+* Calculate truck utilisation using chargeable weight (the larger of actual weight and volume × 333 kg, a common road-freight convention)
 * Split the data into training and testing sets
 * Train the linear regression model on the training set
 
