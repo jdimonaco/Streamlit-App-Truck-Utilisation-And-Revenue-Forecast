@@ -4,7 +4,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, r2_score
 
 
-# Define a class for the fleet analysis with methods to calculate utlisation and predict revenues.
+# Road freight convention: 1 cubic metre (cbm) of cargo is charged as 333 kg.
+# Used to turn volume into a volumetric weight so it can be compared with weight and capacity (kg).
+VOLUMETRIC_FACTOR = 333
+
+
+# Define a class for the fleet analysis with methods to calculate utilisation and predict revenues.
 class FleetAnalysis:
     def __init__(self, data) -> None:
         """Initialise the FleetAnalysis class."""
@@ -12,11 +17,12 @@ class FleetAnalysis:
     
     # Calculate freight over or under utilisation
     def calculate_utilisation(self) -> pd.DataFrame:
-        def utilisation(row) -> pd.DataFrame:
-            """Calculates the maximum value between weight and cbm for each row."""
-            max_value = max(row['weight'], row['cbm'])
-            """If maximum value is greater than capacity return overutilisation else underutilisation."""
-            if max_value > row['capacity']:
+        def utilisation(row) -> str:
+            """Calculates the chargeable weight: the larger of actual weight and volumetric weight (cbm x 333 kg)."""
+            volumetric_weight = row['cbm'] * VOLUMETRIC_FACTOR
+            chargeable_weight = max(row['weight'], volumetric_weight)
+            """If chargeable weight is greater than capacity return overutilisation else underutilisation."""
+            if chargeable_weight > row['capacity']:
                 return "Overutilisation" # Return "Overutilisation" if the limit is exceeded
             else:
                 return "Underutilisation" # Return "Underutilisation" otherwise
